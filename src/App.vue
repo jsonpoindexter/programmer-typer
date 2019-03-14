@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import TextBox from './components/TextBox.vue'
+  import TextBox from './components/TextBox.vue'
 
-export default {
+  export default {
   name: 'app',
   components: {
     TextBox
@@ -16,5 +16,13 @@ export default {
 </script>
 
 <style>
-#app {}
+  html {
+    background: grey;
+  }
+
+  #app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
