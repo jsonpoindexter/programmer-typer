@@ -1,13 +1,13 @@
 <template>
     <div class="main">
-        <textarea class='text-input' disabled="true" v-model="snippet"></textarea>
-        <input @input="eventText" placeholder="Type Here" v-model="userInput">
+        <div class='text-input' ><span class="correct-text">{{correctText}}</span>{{snippet}}</div>
+        <input placeholder="Type Here" v-model="userInput">
     </div>
 </template>
 
 <script>
 // TODO: Put code files in static folder structure and import as string
-const snippet = 'const storage = require(\'../storage\');\n' +
+let snippet = 'const storage = require(\'../storage\');\n' +
         '\n' +
         'module.exports = async (req, res) => {\n' +
         '    try {\n' +
@@ -26,23 +26,21 @@ export default {
     props: {},
   data() {
     return {
-        snippet,
+        snippet: snippet,
         userInput: '',
+        correctText: '',
         isInputDisabled: false
     }
   },
     watch: {
         userInput: function (val) {
-            if (this.userInput[val.length - 1] !== snippet[val.length - 1]) {
-                console.log(false)
-            } else {
-                console.log(true)
+            if(val.length < 1) return;
+            // TODO: handle backspace
+            // TODO: indicate to user where typed text is incorrect
+            if (val[val.length - 1] === this.snippet[0]) {
+                this.correctText = val;
+                this.snippet = this.snippet.slice(1, this.snippet.length);
             }
-        }
-    },
-    methods: {
-        eventText(event) {
-            console.log(event)
         }
     }
 }
@@ -57,13 +55,19 @@ export default {
         width: 600px;
     }
 
-  .text-input {
-      background: black;
-      height: 100%;
-    color: white;
-    border: none;
-    padding: 10px 10px 0;
-    font-family: droid,sans-serif;
-      font-size: 18px;
-  }
+    .text-input {
+        background: black;
+        height: 100%;
+        color: white;
+        border: none;
+        padding: 10px 10px 0;
+        font-family: droid, sans-serif;
+        font-size: 18px;
+        white-space: pre-wrap;
+        overflow-y: auto;
+    }
+
+    .correct-text {
+        background-color: lightgreen;
+    }
 </style>
