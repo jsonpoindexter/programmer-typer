@@ -1,5 +1,8 @@
 <template>
-  <textarea class='text-input' v-model="text"></textarea>
+    <div class="main">
+        <textarea class='text-input' disabled="true" v-model="snippet"></textarea>
+        <input @input="eventText" placeholder="Type Here" v-model="userInput">
+    </div>
 </template>
 
 <script>
@@ -16,31 +19,51 @@ const snippet = 'const storage = require(\'../storage\');\n' +
         '    } catch (e) {\n' +
         '        res.sendStatus(404);\n' +
         '    }\n' +
-        '};\n'
+    '};\n';
 
 export default {
   name: 'TextBox',
-  props: {
-    msg: String
-  },
+    props: {},
   data() {
     return {
-      text: snippet
-
+        snippet,
+        userInput: '',
+        isInputDisabled: false
     }
-  }
+  },
+    watch: {
+        userInput: function (val) {
+            if (this.userInput[val.length - 1] !== snippet[val.length - 1]) {
+                console.log(false)
+            } else {
+                console.log(true)
+            }
+        }
+    },
+    methods: {
+        eventText(event) {
+            console.log(event)
+        }
+    }
 }
 </script>
 
 <style scoped>
+    .main {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        height: 200px;
+        width: 600px;
+    }
+
   .text-input {
-    height: 500px;
-    width: 100%;
-    background: grey;
+      background: black;
+      height: 100%;
     color: white;
     border: none;
     padding: 10px 10px 0;
     font-family: droid,sans-serif;
-    font-size: 32px;
+      font-size: 18px;
   }
 </style>
