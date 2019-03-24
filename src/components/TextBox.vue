@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class='snippet'><span class="correct-text">{{correctText}}</span>{{snippet}}</div>
-        <input class='user-input' placeholder="Type Here" v-model="userInput">
+        <textarea class='user-input' placeholder="Type Here" v-model="userInput"/>
     </div>
 </template>
 
@@ -46,6 +46,7 @@
                     this.snippet = this.snippet.slice(1, this.snippet.length);
                     this.index++
                 }
+                console.log(this.snippet)
             }
         }
     }
