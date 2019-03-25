@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class='snippet'><span class="correct-text">{{correctText}}</span>{{snippet}}</div>
-        <textarea class='user-input' placeholder="Type Here" v-model="userInput"/>
+        <input class='user-input' v-on:keydown.enter="onSubmit" placeholder="Type Here" v-model="userInput"/>
     </div>
 </template>
 
@@ -40,13 +40,27 @@
         },
         watch: {
             userInput: function (val) {
+                // TODO: move to @input event?
                 if (val.length < 1) return;
                 if (val[this.index] === this.snippet[0]) {
-                    this.correctText = val;
+                    this.correctText += val[val.length - 1];
                     this.snippet = this.snippet.slice(1, this.snippet.length);
                     this.index++
                 }
-                console.log(this.snippet)
+            }
+        },
+        methods: {
+            // Clear user input for each line
+            onSubmit: function() {
+                // TODO: disable backspace on correct text?
+                if(this.snippet[0] === '\n') {
+                    this.userInput = '';
+                    this.index = 0;
+                    this.correctText += '\n';
+                    this.snippet = this.snippet = this.snippet.slice(1, this.snippet.length);
+
+                }
+
             }
         }
     }
@@ -78,7 +92,7 @@
     }
 
     .user-input {
-        resize: none;
+        text-align: center;
     }
 
 
