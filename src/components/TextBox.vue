@@ -11,9 +11,7 @@
     // Top text should change background color to green as it is correctly types in the bttom
 
     // TODO: Put code files in static folder structure and import as string
-    let snippet = 'const storage = require(\'../storage\');\n' +
-        '\n' +
-        'module.exports = async (req, res) => {\n' +
+    let snippet = 'a\n' + 'b\n' +
         '    try {\n' +
         '        const meta = await storage.metadata(req.params.id);\n' +
         '        res.set(\'WWW-Authenticate\', `send-v1 ${meta.nonce}`);\n' +
