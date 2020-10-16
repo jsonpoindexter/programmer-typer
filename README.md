@@ -1,5 +1,7 @@
 # programmer-typer
 
+http://typer.jasonpoindexter.io/
+
 ## Project setup
 ```
 npm install
